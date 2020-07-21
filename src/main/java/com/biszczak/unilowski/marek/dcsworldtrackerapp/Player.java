@@ -1,0 +1,25 @@
+package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Table(name = "players")
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Player {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Mission> missions = new ArrayList<>();
+}
