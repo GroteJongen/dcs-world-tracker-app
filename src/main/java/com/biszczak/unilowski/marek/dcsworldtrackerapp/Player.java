@@ -15,6 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 public class Player {
 
+
+    public Player(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
