@@ -2,8 +2,6 @@ package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,20 +10,26 @@ import java.util.Optional;
 @AllArgsConstructor
 public class PlayerController {
 
-  PlayerRepository playerRepository;
+  PlayerService playerService;
+  StatisticsService statisticsService;
 
   @GetMapping("players/{id}")
   public Optional<Player> getplayerById(@RequestParam long id) {
-    return playerRepository.findById(id);
+    return playerService.getPlayerById(id);
   }
 
   @GetMapping("/all")
-  public List<Player> getAllPlayers(){
-    return playerRepository.findAll();
+  public List<Player> getAllPlayers() {
+    return playerService.findAll();
+  }
+
+  @GetMapping("/results")
+  public List<Statistics> getResultsByPlayerID(@RequestParam long id) {
+    return statisticsService.getStatisticsByPlayerId(id);
   }
 
   @PostMapping(value = "/add", consumes = "application/json")
   public List<Player> addPlayer(@RequestBody Player[] players) {
-    return playerRepository.saveAll(Arrays.asList(players));
+    return playerService.saveAll(players);
   }
 }
