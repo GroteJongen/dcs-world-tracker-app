@@ -22,7 +22,7 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column
     private String name;
     @OneToMany(cascade = CascadeType.ALL)

@@ -13,7 +13,7 @@ public class PlayerService {
 
   PlayerRepository playerRepository;
 
-  Optional<Player> getPlayerById(long id) {
+  Optional<Player> getPlayerById(Long id) {
     return playerRepository.findById(id);
   }
 

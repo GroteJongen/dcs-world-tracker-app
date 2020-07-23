@@ -13,7 +13,7 @@ public class PlayerController {
   PlayerService playerService;
   StatisticsService statisticsService;
 
-  @GetMapping("players/{id}")
+  @GetMapping
   public Optional<Player> getplayerById(@RequestParam long id) {
     return playerService.getPlayerById(id);
   }
@@ -23,7 +23,7 @@ public class PlayerController {
     return playerService.findAll();
   }
 
-  @GetMapping("/results")
+  @GetMapping("/results/{id}")
   public List<Statistics> getResultsByPlayerID(@RequestParam long id) {
     return statisticsService.getStatisticsByPlayerId(id);
   }

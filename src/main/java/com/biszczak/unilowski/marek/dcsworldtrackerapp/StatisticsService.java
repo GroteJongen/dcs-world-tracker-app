@@ -3,6 +3,7 @@ package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,8 +15,11 @@ public class StatisticsService {
     private StatisticsRepository statisticsRepository;
     private MissionService missionService;
 
-    public List<Statistics> getStatistics(){
+    public List<Statistics> getAllStatistics(){
         return statisticsRepository.findAll();
+    }
+    public void saveStatistics(Statistics[] statistics){
+         statisticsRepository.saveAll(Arrays.asList(statistics));
     }
 
     public Optional<Statistics> getByID(long id){
