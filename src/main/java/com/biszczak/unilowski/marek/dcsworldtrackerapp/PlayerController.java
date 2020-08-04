@@ -1,5 +1,9 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,7 +18,7 @@ public class PlayerController {
   StatisticsService statisticsService;
 
   @GetMapping
-  public Optional<Player> getplayerById(@RequestParam long id) {
+  public Optional<Player> getPlayerById(@RequestParam long id) {
     return playerService.getPlayerById(id);
   }
 

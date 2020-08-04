@@ -1,4 +1,4 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,4 +30,5 @@ public class Statistics {
   @Column private int groundKills;
 
   @Column private boolean isWon;
+
 }

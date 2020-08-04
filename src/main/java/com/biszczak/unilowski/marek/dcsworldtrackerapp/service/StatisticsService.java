@@ -1,5 +1,7 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.StatisticsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class StatisticsService {
 
-    private StatisticsRepository statisticsRepository;
-    private MissionService missionService;
+    private final StatisticsRepository statisticsRepository;
+    private final MissionService missionService;
 
     public List<Statistics> getAllStatistics(){
         return statisticsRepository.findAll();

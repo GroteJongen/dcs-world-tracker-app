@@ -1,4 +1,4 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.model;
 
 import lombok.*;
 

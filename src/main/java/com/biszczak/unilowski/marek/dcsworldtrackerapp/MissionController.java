@@ -1,5 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Mission;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.MissionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MissionController {
 
-  private MissionService missionService;
+  private final MissionService missionService;
 
   @GetMapping
   public List<Mission> showAllMissions() {

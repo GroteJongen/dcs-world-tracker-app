@@ -1,5 +1,7 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class PlayerService {
 
   PlayerRepository playerRepository;
 
-  Optional<Player> getPlayerById(Long id) {
+  public Optional<Player> getPlayerById(long id) {
     return playerRepository.findById(id);
   }
 
@@ -21,11 +23,11 @@ public class PlayerService {
     playerRepository.save(new Player(name));
   }
 
-  List<Player> findAll() {
+  public List<Player> findAll() {
     return playerRepository.findAll();
   }
 
-  List<Player> saveAll(Player[] players) {
+  public List<Player> saveAll(Player[] players) {
     return playerRepository.saveAll(Arrays.asList(players));
   }
 }

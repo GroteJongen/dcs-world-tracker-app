@@ -1,5 +1,7 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Mission;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.MissionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MissionService {
 
-  private MissionRepository missionRepository;
+  private final MissionRepository missionRepository;
 
   public Optional<Mission> getMissionById(long id) {
     return missionRepository.findById(id);
