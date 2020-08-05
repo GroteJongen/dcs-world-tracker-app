@@ -2,10 +2,8 @@ package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
