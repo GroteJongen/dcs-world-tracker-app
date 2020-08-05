@@ -1,21 +1,21 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp.dto;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.MissionService;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class StatisticsDtoService {
 
-    private StatisticsService statisticsService;
-    private MissionService missionService;
-    private PlayerService playerService;
+    private final StatisticsService statisticsService;
+    private final MissionService missionService;
+    private final PlayerService playerService;
 
     public StatisticsDto createDtoForStatisticsWithId(long id) {
         Statistics statistics = statisticsService.getByID(id).orElseThrow();
-        String missionName = missionService.getMissionById(statistics.getMissionID()).orElseThrow().getMissionName();
+        String missionName = missionService.getMissionById(statistics.getMissionId()).orElseThrow().getMissionName();
         String playerName = playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getName();
         return new StatisticsDto(playerName
                 , missionName

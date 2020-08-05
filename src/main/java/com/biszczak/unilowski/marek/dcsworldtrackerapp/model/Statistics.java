@@ -17,9 +17,9 @@ public class Statistics {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private long id;
 
-  @Column private long missionID;
+  @Column private long missionId;
 
   @Column private long playerId;
 

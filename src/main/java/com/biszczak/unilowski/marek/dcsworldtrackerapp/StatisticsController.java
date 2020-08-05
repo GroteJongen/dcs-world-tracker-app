@@ -1,6 +1,6 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDtoService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
@@ -21,8 +21,8 @@ public class StatisticsController {
         return statisticsService.getAllStatistics();
     }
 
-    @GetMapping("/missionInfo")
-    public StatisticsDto findAllInfoForStatsWithId(@RequestParam long id){
+    @GetMapping("/missionInfo/{id}")
+    public StatisticsDto findAllInfoForStatsWithId(@PathVariable long id){
         return statisticsDtoService.createDtoForStatisticsWithId(id);
     }
 

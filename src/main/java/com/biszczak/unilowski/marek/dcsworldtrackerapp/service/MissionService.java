@@ -13,21 +13,17 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MissionService {
 
-  private final MissionRepository missionRepository;
+    private final MissionRepository missionRepository;
 
-  public Optional<Mission> getMissionById(long id) {
-    return missionRepository.findById(id);
-  }
+    public Optional<Mission> getMissionById(long id) {
+        return missionRepository.findById(id);
+    }
 
-  public void saveMission(String name, String description) {
-    missionRepository.save(new Mission(name, description));
-  }
+    public List<Mission> findAll() {
+        return missionRepository.findAll();
+    }
 
-  public List<Mission> findAll() {
-    return missionRepository.findAll();
-  }
-
-  public List<Mission> saveAll(Mission[] missions) {
-    return missionRepository.saveAll(Arrays.asList(missions));
-  }
+    public List<Mission> saveAll(Mission[] missions) {
+        return missionRepository.saveAll(Arrays.asList(missions));
+    }
 }

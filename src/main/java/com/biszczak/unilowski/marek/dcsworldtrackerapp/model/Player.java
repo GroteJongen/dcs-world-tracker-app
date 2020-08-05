@@ -26,5 +26,5 @@ public class Player {
     @Column
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Mission> missions = new ArrayList<>();
+    private final List<Mission> missions = new ArrayList<>();
 }

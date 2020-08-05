@@ -29,7 +29,7 @@ public class StatisticsService {
     }
 
     public List<Statistics> getStatisticsByMissionId(long id){
-        return statisticsRepository.findAll().stream().filter(statistic -> statistic.getMissionID() == id).collect(Collectors.toList());
+        return statisticsRepository.findAll().stream().filter(statistic -> statistic.getMissionId() == id).collect(Collectors.toList());
     }
 
     public List<Statistics> getStatisticsByPlayerId(long id){
