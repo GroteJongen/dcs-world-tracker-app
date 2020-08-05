@@ -1,8 +1,10 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class PlayerController {
 
   PlayerService playerService;
-  StatisticsService statisticsService;
+  StatisticsDtoService statisticsDtoService;
 
   @GetMapping
   public Optional<Player> getPlayerById(@RequestParam long id) {
@@ -28,8 +30,8 @@ public class PlayerController {
   }
 
   @GetMapping("/results/{id}")
-  public List<Statistics> getResultsByPlayerID(@RequestParam long id) {
-    return statisticsService.getStatisticsByPlayerId(id);
+  public List<StatisticsDto> getResultsByPlayerID(@PathVariable long id) {
+    return statisticsDtoService.createDtoFroAllStatisticsWithPlayerId(id);
   }
 
   @PostMapping(value = "/add", consumes = "application/json")
