@@ -2,7 +2,6 @@ package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

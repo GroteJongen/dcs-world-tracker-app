@@ -1,6 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerDto;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
@@ -14,9 +15,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class PlayerService {
+public class PlayerService implements IUserService {
 
     @Transactional
+    @Override
     public Player registerNewPlayerAccount(PlayerDto playerDto)
             throws PlayerAlreadyExistException {
 
@@ -25,7 +27,10 @@ public class PlayerService {
                     "There is an account with that login: "
                             + playerDto.getLogin());
         }
-        return null;
+        Player player = new Player();
+        player.setLogin(playerDto.getLogin());
+        player.setPassword(playerDto.getPassword());
+        return playerRepository.save(player);
     }
 
     private boolean loginExists(String login) {
