@@ -15,20 +15,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Statistics {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-  @Column private long missionId;
+    private long missionId;
 
-  @Column private long playerId;
+    private long playerId;
 
-  @Column private int score;
+    private int score;
 
-  @Column private int airKills;
+    private int airKills;
 
-  @Column private int groundKills;
+    private int groundKills;
 
-  @Column private boolean isWon;
+    private boolean isWon;
 
 }

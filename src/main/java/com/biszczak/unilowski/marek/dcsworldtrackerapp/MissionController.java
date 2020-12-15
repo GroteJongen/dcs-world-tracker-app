@@ -1,26 +1,50 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.MissionInfoDto;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Mission;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.MissionService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
 @RequestMapping("/missions")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MissionController {
 
     private final MissionService missionService;
+    private final StatisticsDtoService statisticsDtoService;
+    private final StatisticsService statisticsService;
 
-    @GetMapping
+
+    @RequestMapping(method = GET)
     public List<Mission> showAllMissions() {
         return missionService.findAll();
     }
 
-    @PostMapping(value = "/add", consumes = "application/json")
-    public List<Mission> addMission(@RequestBody Mission[] missions) {
-        return this.missionService.saveAll(missions);
+    @RequestMapping(value = "/create", method = POST)
+    public Mission addMission(@RequestBody MissionInfoDto missions) {
+        return missionService.saveMission(missions);
+    }
+
+    @RequestMapping(value = "/stats", method = POST)
+    public Statistics addStatsToMissionWithGivenName(@RequestBody StatisticsDto statisticsDto) {
+        return statisticsService.saveStatisticsForMissionWithName(statisticsDto);
+    }
+
+    @RequestMapping(value = "/missionInfo/{id}", method = GET)
+    public StatisticsDto findAllInfoForStatsWithId(@PathVariable long id) {
+        return statisticsDtoService.createDtoForStatisticsWithId(id);
     }
 }

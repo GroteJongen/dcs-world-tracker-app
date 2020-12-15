@@ -1,22 +1,18 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.dto;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.util.List;
 
-
-@NoArgsConstructor
+@Setter
 @Getter
 @AllArgsConstructor
-public class StatisticsDto {
+@NoArgsConstructor
+public class MissionInfoDto {
 
-    private Long playerId;
     private String missionName;
-    private int airKills;
-    private int groundKills;
-    private int score;
-    private boolean isWon;
+    private String missionDescription;
 
 }

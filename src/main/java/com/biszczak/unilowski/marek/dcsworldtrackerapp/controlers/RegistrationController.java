@@ -1,34 +1,33 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerDto;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@Controller("/user")
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+@RestController("/")
 public class RegistrationController {
 
     @Autowired
     PlayerService playerService;
 
-    @GetMapping("/registration")
-    public String showRegistrationForm(WebRequest request, Model model) {
-        PlayerDto playerDto = new PlayerDto();
-        model.addAttribute("user", playerDto);
-        return "registration";
+    @RequestMapping(value = "/foo",method = GET)
+    public ModelAndView showRegistrationForm() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("registration");
+        return modelAndView;
     }
 
     @PostMapping("/register")

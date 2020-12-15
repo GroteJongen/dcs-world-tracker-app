@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,17 +43,7 @@ public class PlayerService implements IUserService {
         return playerRepository.findById(id);
     }
 
-    public void savePlayerWithName(String name) {
-        playerRepository.save(new Player(name));
-    }
-
     public List<Player> findAll() {
         return playerRepository.findAll();
     }
-
-    public List<Player> saveAll(Player[] players) {
-        return playerRepository.saveAll(Arrays.asList(players));
-    }
-
-
 }

@@ -1,3 +1,4 @@
+/*
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.security;
 
 import org.springframework.context.annotation.Configuration;
@@ -10,13 +11,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
+     http.headers().disable();
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/user/foo").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/results/total/1")
                 .permitAll();
+
     }
 
 }
+*/

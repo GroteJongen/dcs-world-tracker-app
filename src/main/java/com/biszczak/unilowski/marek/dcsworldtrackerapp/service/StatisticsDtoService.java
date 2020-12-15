@@ -19,8 +19,8 @@ public class StatisticsDtoService {
     public StatisticsDto createDtoForStatisticsWithId(long id) {
         Statistics statistics = statisticsService.getByID(id).orElseThrow();
         String missionName = missionService.getMissionById(statistics.getMissionId()).orElseThrow().getMissionName();
-        String playerName = playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getName();
-        return new StatisticsDto(playerName
+        long playerId = playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getId();
+        return new StatisticsDto(playerId
                 , missionName
                 , statistics.getAirKills()
                 , statistics.getGroundKills()
@@ -32,7 +32,7 @@ public class StatisticsDtoService {
         List<Statistics> stats = statisticsService.getStatisticsByPlayerId(id);
         List<StatisticsDto> statsDto = new ArrayList<>();
         for (Statistics statistics : stats) {
-            statsDto.add(new StatisticsDto(playerService.getPlayerById(statistics.getPlayerId()).get().getName()
+            statsDto.add(new StatisticsDto(playerService.getPlayerById(statistics.getPlayerId()).get().getId()
                     , missionService.getMissionById(statistics.getMissionId()).get().getMissionName()
                     , statistics.getAirKills(), statistics.getGroundKills()
                     , statistics.getScore()
