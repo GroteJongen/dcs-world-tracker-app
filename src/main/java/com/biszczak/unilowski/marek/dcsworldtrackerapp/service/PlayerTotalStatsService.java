@@ -75,18 +75,6 @@ public class PlayerTotalStatsService {
         return counter;
     }
 
-    private int calculateAllLosesByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
-        int counter = 0;
-        for (Statistics statistics : playerStats) {
-            if (!statistics.isWon()) {
-                counter += 1;
-            }
-
-        }
-        return counter;
-    }
-
     private int countTotalGamesByPlayerId(long id) {
         List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
         int counter = 0;
@@ -96,4 +84,6 @@ public class PlayerTotalStatsService {
         }
         return counter;
     }
+
+
 }

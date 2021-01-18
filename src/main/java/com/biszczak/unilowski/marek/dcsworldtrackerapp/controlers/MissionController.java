@@ -1,4 +1,4 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.MissionInfoDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
@@ -8,6 +8,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.MissionService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +24,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @AllArgsConstructor
 public class MissionController {
 
+    @Autowired
     private final MissionService missionService;
+    @Autowired
     private final StatisticsDtoService statisticsDtoService;
+    @Autowired
     private final StatisticsService statisticsService;
 
 

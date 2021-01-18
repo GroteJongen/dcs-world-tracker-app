@@ -1,6 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
+
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,12 +33,13 @@ public class StatisticsDtoService {
         List<Statistics> stats = statisticsService.getStatisticsByPlayerId(id);
         List<StatisticsDto> statsDto = new ArrayList<>();
         for (Statistics statistics : stats) {
-            statsDto.add(new StatisticsDto(playerService.getPlayerById(statistics.getPlayerId()).get().getId()
-                    , missionService.getMissionById(statistics.getMissionId()).get().getMissionName()
+            statsDto.add(new StatisticsDto(playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getId()
+                    , missionService.getMissionById(statistics.getMissionId()).orElseThrow().getMissionName()
                     , statistics.getAirKills(), statistics.getGroundKills()
                     , statistics.getScore()
                     , statistics.isWon()));
         }
         return statsDto;
     }
+
 }

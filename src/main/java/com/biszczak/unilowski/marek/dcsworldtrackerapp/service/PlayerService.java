@@ -6,6 +6,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,6 +16,9 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class PlayerService implements IUserService {
+
+    @Autowired
+    private final PlayerRepository playerRepository;
 
     @Transactional
     @Override
@@ -36,9 +40,6 @@ public class PlayerService implements IUserService {
         return playerRepository.findByLogin(login).isPresent();
     }
 
-    @Autowired
-    PlayerRepository playerRepository;
-
     public Optional<Player> getPlayerById(long id) {
         return playerRepository.findById(id);
     }
@@ -46,4 +47,6 @@ public class PlayerService implements IUserService {
     public List<Player> findAll() {
         return playerRepository.findAll();
     }
+
+
 }
