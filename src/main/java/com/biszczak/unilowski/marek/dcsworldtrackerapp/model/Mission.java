@@ -1,8 +1,12 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.model;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
+
+import static org.hibernate.annotations.CascadeType.ALL;
 
 @Table(name = "missions")
 @Entity
@@ -20,10 +24,13 @@ public class Mission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column
     private String missionName;
-
     @Column
     private String description;
+    @OneToMany
+    @Cascade(ALL)
+    @JoinColumn(name = "missionId")
+    private List<Statistics> statistics;
 }
