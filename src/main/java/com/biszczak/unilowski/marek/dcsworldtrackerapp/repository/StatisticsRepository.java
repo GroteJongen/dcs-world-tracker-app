@@ -4,11 +4,12 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
-    List<Statistics> findAllByMissionId(long missionId);
+    Optional<Statistics> findByMissionIdAndPlayerId(long missionId, long playerId);
 
     List<Statistics> findAllByPlayerId(long playerId);
 }

@@ -28,6 +28,7 @@ public class DcsWorldTrackerAppApplication {
     public CommandLineRunner dataInitializer(MissionRepository missionRepository, PlayerRepository playerRepository, StatisticsRepository statisticsRepository) {
         return (args) -> {
             playerRepository.save(new Player("Andrzej"));
+            playerRepository.save(new Player("Zdziszek"));
             missionRepository.save(new Mission(1, "Andrzej leci jak szalooony", "Brak opisu", Collections.singletonList(new Statistics(1, 1, 1, 100, 2, 3, true))));
             missionRepository.save(new Mission(2, "Andrzej dolatuje do lotniska", "Brak opisu", Collections.singletonList((new Statistics(2, 2, 1, 200, 5, 1, false)))));
             missionRepository.save(new Mission(3, "Andrzej zladowal", "Brak opisu", Collections.singletonList(new Statistics(3, 3, 1, 300, 6, 5, true))));

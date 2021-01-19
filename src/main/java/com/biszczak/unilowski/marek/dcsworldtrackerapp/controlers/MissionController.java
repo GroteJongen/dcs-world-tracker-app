@@ -37,14 +37,14 @@ public class MissionController {
         return missionService.findAll();
     }
 
-    @RequestMapping(value = "/create", method = POST)
+    @RequestMapping(value = "/new", method = POST)
     public Mission addMission(@RequestBody MissionInfoDto missions) {
         return missionService.saveMission(missions);
     }
 
     @RequestMapping(value = "/stats", method = POST)
     public Statistics addStatsToMissionWithGivenName(@RequestBody StatisticsDto statisticsDto) {
-        return statisticsService.saveStatisticsForMissionWithName(statisticsDto);
+        return statisticsService.saveStatisticsForMission(statisticsDto);
     }
 
     @RequestMapping(value = "/missionInfo/{id}", method = GET)

@@ -19,7 +19,7 @@ public class PlayerTotalStatsService {
         int totalScore = calcTotalScoreByPlayerId(id);
         int totalWins = countAllWinsByPlayerId(id);
         int totalLoses = countAllLosesByPlayerId(id);
-        int totalGames = countTotalGamesByPlayerId(id);
+        int totalGames = statisticsService.getStatisticsByPlayerId(id).size();
         return new PlayerStats(totalGames, totalAirKills, totalGroundKills, totalScore, totalWins, totalLoses);
     }
 
@@ -68,22 +68,10 @@ public class PlayerTotalStatsService {
         int counter = 0;
         for (Statistics statistics : playerStats) {
             if (!statistics.isWon()) {
-                counter += 1;
+                counter++;
             }
 
         }
         return counter;
     }
-
-    private int countTotalGamesByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
-        int counter = 0;
-        for (Statistics statistics : playerStats) {
-            counter++;
-
-        }
-        return counter;
-    }
-
-
 }

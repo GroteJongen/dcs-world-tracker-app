@@ -19,27 +19,28 @@ public class StatisticsDtoService {
 
     public StatisticsDto createDtoForStatisticsWithId(long id) {
         Statistics statistics = statisticsService.getByID(id).orElseThrow();
-        String missionName = missionService.getMissionById(statistics.getMissionId()).orElseThrow().getMissionName();
-        long playerId = playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getId();
-        return new StatisticsDto(playerId
-                , missionName
-                , statistics.getAirKills()
-                , statistics.getGroundKills()
-                , statistics.getScore()
-                , statistics.isWon());
+        return createStatisticsDtoFromStatistics(statistics);
     }
 
-    public List<StatisticsDto> createDtoFroAllStatisticsWithPlayerId(long id) {
-        List<Statistics> stats = statisticsService.getStatisticsByPlayerId(id);
-        List<StatisticsDto> statsDto = new ArrayList<>();
-        for (Statistics statistics : stats) {
-            statsDto.add(new StatisticsDto(playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getId()
-                    , missionService.getMissionById(statistics.getMissionId()).orElseThrow().getMissionName()
-                    , statistics.getAirKills(), statistics.getGroundKills()
-                    , statistics.getScore()
-                    , statistics.isWon()));
+    public List<StatisticsDto> addPlayerStatisticsToList(long id) {
+        List<Statistics> playerStatistics = statisticsService.getStatisticsByPlayerId(id);
+        List<StatisticsDto> playerStatisticsDto = new ArrayList<>();
+        for (Statistics statistics : playerStatistics) {
+            playerStatisticsDto.add(createStatisticsDtoFromStatistics(statistics));
         }
-        return statsDto;
+        return playerStatisticsDto;
+    }
+
+    private StatisticsDto createStatisticsDtoFromStatistics(Statistics statistics) {
+        long playerId = playerService.getPlayerById(statistics.getPlayerId()).orElseThrow().getId();
+        long missionId = missionService.getMissionById(statistics.getMissionId()).orElseThrow().getId();
+        return StatisticsDto.builder()
+                .playerId(playerId)
+                .missionId(missionId)
+                .airKills(statistics.getAirKills())
+                .groundKills(statistics.getGroundKills())
+                .score(statistics.getScore())
+                .isWon(statistics.isWon()).build();
     }
 
 }

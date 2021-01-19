@@ -1,9 +1,8 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
-public class PlayerAlreadyExistException extends Throwable {
-    public PlayerAlreadyExistException(@NotNull @NotEmpty String msg) {
+public class PlayerAlreadyExistException extends RuntimeException {
+    public PlayerAlreadyExistException(String message) {
+        super(message);
     }
 }

@@ -6,7 +6,6 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

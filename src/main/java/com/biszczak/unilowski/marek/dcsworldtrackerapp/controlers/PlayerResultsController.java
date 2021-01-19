@@ -26,7 +26,7 @@ public class PlayerResultsController {
 
     @GetMapping("/{id}")
     public List<StatisticsDto> getResultsByPlayerID(@PathVariable long id) {
-        return statisticsDtoService.createDtoFroAllStatisticsWithPlayerId(id);
+        return statisticsDtoService.addPlayerStatisticsToList(id);
     }
 
     @GetMapping("/total/{id}")

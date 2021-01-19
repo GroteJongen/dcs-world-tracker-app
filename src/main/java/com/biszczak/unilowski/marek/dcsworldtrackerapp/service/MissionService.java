@@ -24,10 +24,6 @@ public class MissionService {
         return missionRepository.findAll();
     }
 
-    public Mission findMissionByMissionName(String missionName){
-        return missionRepository.findByMissionName(missionName);
-    }
-
     public Mission saveMission(MissionInfoDto missionInfoDto){
         return missionRepository.save(new Mission(missionInfoDto.getMissionName(),missionInfoDto.getMissionDescription()));
     }
