@@ -7,12 +7,11 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerTotalStatsS
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping("/results")
@@ -24,12 +23,12 @@ public class PlayerResultsController {
     @Autowired
     private final PlayerTotalStatsService playerTotalStatsService;
 
-    @GetMapping("/{id}")
+    @RequestMapping( value = "/{id}", method = GET)
     public List<StatisticsDto> getResultsByPlayerID(@PathVariable long id) {
         return statisticsDtoService.addPlayerStatisticsToList(id);
     }
 
-    @GetMapping("/total/{id}")
+    @RequestMapping(value = "/total/{id}",method = GET)
     public PlayerStats getTotalResultsByPlayerId(@PathVariable long id){
         return playerTotalStatsService.getTotalStatsOfPlayerWithId(id);
     }

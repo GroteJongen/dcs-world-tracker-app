@@ -8,9 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
@@ -21,18 +23,18 @@ public class PlayerController {
     @Autowired
     private final PlayerService playerService;
 
-    @GetMapping
+    @RequestMapping(method = GET)
     public Optional<Player> getPlayerById(@RequestParam long id) {
         return playerService.getPlayerById(id);
     }
 
-    @GetMapping("/all")
+    @RequestMapping(value = "/all", method = GET)
     public List<Player> getAllPlayers() {
         return playerService.findAll();
     }
 
     @RequestMapping(value = "/add",method = POST)
-    public Player addPlayer(@RequestBody PlayerDto playerDto) throws PlayerAlreadyExistException {
+    public Player addPlayer(@RequestBody @Valid PlayerDto playerDto) throws PlayerAlreadyExistException {
         return playerService.registerNewPlayerAccount(playerDto);
     }
 }
