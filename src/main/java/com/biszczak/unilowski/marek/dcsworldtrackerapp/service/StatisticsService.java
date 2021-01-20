@@ -7,6 +7,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.repository.StatisticsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,6 +61,8 @@ public class StatisticsService {
         return statisticsRepository.save(convertStatisticsDtoToStatistics(statisticsDto));
 
     }
-
+    public List<Statistics> findAllSortedForPlayerId(Sort sort, long userId){
+        return statisticsRepository.findAllByPlayerId(userId,sort);
+    }
 
 }

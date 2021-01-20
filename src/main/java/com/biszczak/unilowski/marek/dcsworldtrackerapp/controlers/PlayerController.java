@@ -1,9 +1,15 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.FilterCriteriaDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerDto;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerTotalStatsService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.SearchService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +28,11 @@ public class PlayerController {
 
     @Autowired
     private final PlayerService playerService;
+    @Autowired
+    private final PlayerTotalStatsService playerTotalStatsService;
+    @Autowired
+    private final StatisticsDtoService statisticsDtoService;
+
 
     @RequestMapping(method = GET)
     public Optional<Player> getPlayerById(@RequestParam long id) {
@@ -33,8 +44,20 @@ public class PlayerController {
         return playerService.findAll();
     }
 
-    @RequestMapping(value = "/add",method = POST)
+    @RequestMapping(value = "/add", method = POST)
     public Player addPlayer(@RequestBody @Valid PlayerDto playerDto) throws PlayerAlreadyExistException {
         return playerService.registerNewPlayerAccount(playerDto);
     }
+
+    @RequestMapping(value = "/total/{id}", method = GET)
+    public PlayerStats getTotalResultsByPlayerId(@PathVariable long id) {
+        return playerTotalStatsService.getTotalStatsOfPlayerWithId(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = GET)
+    public List<StatisticsDto> getResultsByPlayerID(@PathVariable long id, @RequestBody FilterCriteriaDto filterCriteriaDto) {
+        return statisticsDtoService.getAllSortedResults(id, filterCriteriaDto);
+    }
+
+
 }

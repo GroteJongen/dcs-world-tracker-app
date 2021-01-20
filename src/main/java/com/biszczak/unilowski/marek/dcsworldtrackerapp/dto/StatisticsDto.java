@@ -12,8 +12,9 @@ import lombok.*;
 @Setter
 public class StatisticsDto {
 
+    private Long missionId;
     private Long playerId;
-    private long missionId;
+    private String missionName;
     private int airKills;
     private int groundKills;
     private int score;
