@@ -14,18 +14,18 @@ public class PlayerTotalStatsService {
     private final StatisticsService statisticsService;
 
     public PlayerStats getTotalStatsOfPlayerWithId(long id) {
-        int totalGroundKills = calculateTotalGroundKillsByPlayerId(id);
-        int totalAirKills = calcTotalAirKillsByPlayerId(id);
-        int totalScore = calcTotalScoreByPlayerId(id);
-        int totalWins = countAllWinsByPlayerId(id);
-        int totalLoses = countAllLosesByPlayerId(id);
+        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+        int totalGroundKills = calculateTotalGroundKillsByPlayerId(playerStats);
+        int totalAirKills = calcTotalAirKillsByPlayerId(playerStats);
+        int totalScore = calcTotalScoreByPlayerId(playerStats);
+        int totalWins = countAllWinsByPlayerId(playerStats);
+        int totalLoses = countAllLosesByPlayerId(playerStats);
         int totalGames = statisticsService.getStatisticsByPlayerId(id).size();
         return new PlayerStats(totalGames, totalAirKills, totalGroundKills, totalScore, totalWins, totalLoses);
     }
 
 
-    private int calculateTotalGroundKillsByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+    private int calculateTotalGroundKillsByPlayerId(List<Statistics> playerStats) {
         int sum = 0;
         for (Statistics statistics : playerStats) {
             sum += statistics.getGroundKills();
@@ -33,8 +33,7 @@ public class PlayerTotalStatsService {
         return sum;
     }
 
-    private int calcTotalAirKillsByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+    private int calcTotalAirKillsByPlayerId(List<Statistics> playerStats) {
         int sum = 0;
         for (Statistics statistics : playerStats) {
             sum += statistics.getAirKills();
@@ -42,8 +41,8 @@ public class PlayerTotalStatsService {
         return sum;
     }
 
-    private int calcTotalScoreByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+    private int calcTotalScoreByPlayerId(List<Statistics> playerStats) {
+
         int sum = 0;
         for (Statistics statistics : playerStats) {
             sum += statistics.getScore();
@@ -51,8 +50,7 @@ public class PlayerTotalStatsService {
         return sum;
     }
 
-    private int countAllWinsByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+    private int countAllWinsByPlayerId(List<Statistics> playerStats) {
         int counter = 0;
         for (Statistics statistics : playerStats) {
             if (statistics.isWon()) {
@@ -63,8 +61,7 @@ public class PlayerTotalStatsService {
         return counter;
     }
 
-    private int countAllLosesByPlayerId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+    private int countAllLosesByPlayerId(List<Statistics> playerStats) {
         int counter = 0;
         for (Statistics statistics : playerStats) {
             if (!statistics.isWon()) {

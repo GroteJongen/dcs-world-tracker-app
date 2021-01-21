@@ -5,6 +5,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.UnrecognizedPa
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.strategy.ReportGenerator;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
@@ -19,9 +20,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-@AllArgsConstructor
-@Getter
 @Setter
+@Getter
 @Service
 public class ReportGeneratorContext {
 
@@ -30,9 +30,15 @@ public class ReportGeneratorContext {
     @Autowired
     private final StatisticsDtoService statisticsDtoService;
 
-    private final ReportGenerator reportGenerator;
+    public ReportGeneratorContext(PlayerTotalStatsService playerTotalStatsService, StatisticsDtoService statisticsDtoService) {
+        this.playerTotalStatsService = playerTotalStatsService;
+        this.statisticsDtoService = statisticsDtoService;
+    }
 
-    public Resource getPlayerStatsReportBasingOnTypeGivenByUser(String type, long playerId) throws IOException {
+    private ReportGenerator reportGenerator;
+
+    public Resource getPlayerStatsReportBasingOnTypeGivenByUser(String type, long playerId, String format) throws IOException {
+        setProperStrategy(format);
         if (type.equals("total")) {
             return getPlayerTotalStatsReport(playerTotalStatsService.getTotalStatsOfPlayerWithId(playerId), playerId);
         }
@@ -55,6 +61,15 @@ public class ReportGeneratorContext {
     @Scheduled(fixedRate = 5000)
     public void removeDir() throws IOException {
         FileUtils.deleteDirectory(new File(System.getProperty("java.io.tmpdir") + "/report"));
+    }
+
+    private void setProperStrategy(String format) {
+        if (format.equalsIgnoreCase("xml")) {
+            this.setReportGenerator(new XmlReportGenerator());
+        }
+        if (format.equalsIgnoreCase("json")) {
+            this.setReportGenerator(new JsonReportGenerator());
+        }
     }
 
 

@@ -62,13 +62,11 @@ public class PlayerController {
         return statisticsDtoService.getAllSortedResults(id, filterCriteriaDto);
     }
 
-    @RequestMapping(value = "/report/{id}/{reportType}", method = GET)
-    public Resource generatePlayerRaport(@PathVariable long id, HttpServletResponse response, @PathVariable String reportType) throws IOException {
+    @RequestMapping(value = "/report/{id}/{reportType}/{format}", method = GET)
+    public Resource generatePlayerReport(@PathVariable long id, HttpServletResponse response, @PathVariable String reportType, @PathVariable String format) throws IOException {
         String headerName = "attachment;filename=" + id;
         response.addHeader("Content-disposition", headerName);
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        return reportGeneratorContext.getPlayerStatsReportBasingOnTypeGivenByUser(reportType, id);
+        return reportGeneratorContext.getPlayerStatsReportBasingOnTypeGivenByUser(reportType, id,format);
     }
-
-
 }
