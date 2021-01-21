@@ -6,15 +6,16 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerService;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.PlayerTotalStatsService;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.SearchService;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,8 @@ public class PlayerController {
     private final PlayerTotalStatsService playerTotalStatsService;
     @Autowired
     private final StatisticsDtoService statisticsDtoService;
+    @Autowired
+    private final ReportGeneratorContext reportGeneratorContext;
 
 
     @RequestMapping(method = GET)
@@ -57,6 +60,14 @@ public class PlayerController {
     @RequestMapping(value = "/{id}", method = GET)
     public List<StatisticsDto> getResultsByPlayerID(@PathVariable long id, @RequestBody FilterCriteriaDto filterCriteriaDto) {
         return statisticsDtoService.getAllSortedResults(id, filterCriteriaDto);
+    }
+
+    @RequestMapping(value = "/report/{id}/{reportType}", method = GET)
+    public Resource generatePlayerRaport(@PathVariable long id, HttpServletResponse response, @PathVariable String reportType) throws IOException {
+        String headerName = "attachment;filename=" + id;
+        response.addHeader("Content-disposition", headerName);
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        return reportGeneratorContext.getPlayerStatsReportBasingOnTypeGivenByUser(reportType, id);
     }
 
 
