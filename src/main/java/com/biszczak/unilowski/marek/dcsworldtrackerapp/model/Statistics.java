@@ -3,6 +3,7 @@ package com.biszczak.unilowski.marek.dcsworldtrackerapp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name = "statistics")
@@ -28,5 +29,7 @@ public class Statistics {
     private int groundKills;
 
     private boolean isWon;
+
+    private long date;
 
 }

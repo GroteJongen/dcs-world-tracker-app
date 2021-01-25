@@ -42,7 +42,6 @@ public class PlayerTotalStatsService {
     }
 
     private int calcTotalScoreByPlayerId(List<Statistics> playerStats) {
-
         int sum = 0;
         for (Statistics statistics : playerStats) {
             sum += statistics.getScore();

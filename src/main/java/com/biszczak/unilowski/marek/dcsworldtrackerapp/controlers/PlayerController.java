@@ -1,6 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.FilterCriteriaDto;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.MissionDatesDateDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
@@ -62,11 +63,17 @@ public class PlayerController {
         return statisticsDtoService.getAllSortedResults(id, filterCriteriaDto);
     }
 
-    @RequestMapping(value = "/report/{id}/{reportType}/{format}", method = GET)
-    public Resource generatePlayerReport(@PathVariable long id, HttpServletResponse response, @PathVariable String reportType, @PathVariable String format) throws IOException {
+    @RequestMapping(value = "/report/{id}/{reportType}/{format}", method = POST)
+    public Resource generatePlayerReport(@PathVariable long id, HttpServletResponse response,
+                                         @PathVariable String reportType,
+                                         @PathVariable String format,
+                                         @RequestBody(required = false) MissionDatesDateDto missionDatesDateDto) throws IOException {
         String headerName = "attachment;filename=" + id;
         response.addHeader("Content-disposition", headerName);
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        return reportGeneratorContext.getPlayerStatsReportBasingOnTypeGivenByUser(reportType, id,format);
+        if (missionDatesDateDto != null) {
+            return reportGeneratorContext.getPlayerStatsReportBasingOnTypeGivenByUser(id, format, missionDatesDateDto);
+        }
+        return reportGeneratorContext.getPlayerStatsReportBasingOnTypeGivenByUser(reportType, id, format);
     }
 }

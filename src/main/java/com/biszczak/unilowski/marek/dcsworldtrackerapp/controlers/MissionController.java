@@ -1,6 +1,5 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.FilterCriteriaDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.MissionInfoDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Mission;
@@ -9,6 +8,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.MissionService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.SearchService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +45,7 @@ public class MissionController {
     }
 
     @RequestMapping(value = "/stats/add", method = POST)
-    public Statistics addStatsToMissionWithGivenName(@RequestBody StatisticsDto statisticsDto) {
+    public Statistics addStatsToMissionWithGivenName(@RequestBody StatisticsDto statisticsDto) throws JsonProcessingException {
         return statisticsService.saveStatisticsForMission(statisticsDto);
     }
 

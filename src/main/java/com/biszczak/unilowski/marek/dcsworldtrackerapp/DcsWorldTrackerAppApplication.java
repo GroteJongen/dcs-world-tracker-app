@@ -19,8 +19,6 @@ public class DcsWorldTrackerAppApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DcsWorldTrackerAppApplication.class, args);
-        //TODO add exceptions and encapsulate all data save/read
-        //TODO Start thinking of implementing spring security into this project
 
     }
 

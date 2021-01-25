@@ -38,6 +38,15 @@ public class StatisticsDtoService {
         return playerStatisticsDto;
     }
 
+    public List<StatisticsDto> getAllPlayerMissionStatsForPeriod(long timestampFrom, long timestampTO, long playerId) {
+        List<Statistics> playerStatistics = statisticsService.getALLPlayerStatisticsForPeriod(timestampFrom, timestampTO, playerId);
+        List<StatisticsDto> playerStatisticsDto = new ArrayList<>();
+        for (Statistics statistics : playerStatistics) {
+            playerStatisticsDto.add(createStatisticsDtoFromStatistics(statistics));
+        }
+        return playerStatisticsDto;
+    }
+
     public List<StatisticsDto> getAllSortedResults(long id, FilterCriteriaDto filterCriteriaDto) {
         List<StatisticsDto> sortedStatistics = new ArrayList<>();
         if (filterCriteriaDto.getSort().equals("ASC")) {
