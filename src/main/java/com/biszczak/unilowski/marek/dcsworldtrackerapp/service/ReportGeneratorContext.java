@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +61,7 @@ public class ReportGeneratorContext {
         }
     }
 
-    public Resource getPlayerStatsReportBasingOnTypeGivenByUser(long playerId, String format, StatisticsDatesToSearchDto missionDatesDateDto) throws IOException, ParseException {
+    public Resource getPlayerStatsReportBasingOnTypeGivenByUser(long playerId, String format, StatisticsDatesToSearchDto missionDatesDateDto) throws IOException {
         setProperStrategy(format);
         return getPlayerTotalStatsReport(statisticsService.calculateTotalStatisticsForPlayerBasingOnDateQuery(playerId, missionDatesDateDto), playerId);
     }
