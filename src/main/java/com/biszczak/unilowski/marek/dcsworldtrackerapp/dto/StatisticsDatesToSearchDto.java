@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class MissionDatesDateDto {
+public class StatisticsDatesToSearchDto {
 
-    private String dateFrom;
-    private String dateTo;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
 
 }

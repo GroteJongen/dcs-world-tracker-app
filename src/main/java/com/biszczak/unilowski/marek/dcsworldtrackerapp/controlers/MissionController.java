@@ -1,5 +1,6 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDatesToSearchDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.MissionInfoDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Mission;
@@ -13,6 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -45,9 +48,15 @@ public class MissionController {
     }
 
     @RequestMapping(value = "/stats/add", method = POST)
-    public Statistics addStatsToMissionWithGivenName(@RequestBody StatisticsDto statisticsDto) throws JsonProcessingException {
+    public Statistics addStatsToMissionWithGivenName(@RequestBody StatisticsDto statisticsDto) throws IOException {
         return statisticsService.saveStatisticsForMission(statisticsDto);
     }
+
+    @RequestMapping(value = "/byDate/{id}",method = POST)
+    public List<Statistics> getByPlayerAndDte(@PathVariable long id, @RequestBody StatisticsDatesToSearchDto missionDatesDateDto) throws ParseException {
+        return statisticsService.getALLPlayerStatisticsForPeriod(missionDatesDateDto,id);
+    }
+
 
     @RequestMapping(value = "/missionInfo/{id}", method = GET)
     public StatisticsDto findAllInfoForStatsWithId(@PathVariable long id) {

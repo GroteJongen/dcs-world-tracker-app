@@ -11,16 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 public class PlayerTotalStatsService {
 
-    private final StatisticsService statisticsService;
 
-    public PlayerStats getTotalStatsOfPlayerWithId(long id) {
-        List<Statistics> playerStats = statisticsService.getStatisticsByPlayerId(id);
+    public PlayerStats getTotalStatsOfPlayerWithId(long id, List<Statistics> playerStats) {
         int totalGroundKills = calculateTotalGroundKillsByPlayerId(playerStats);
         int totalAirKills = calcTotalAirKillsByPlayerId(playerStats);
         int totalScore = calcTotalScoreByPlayerId(playerStats);
         int totalWins = countAllWinsByPlayerId(playerStats);
         int totalLoses = countAllLosesByPlayerId(playerStats);
-        int totalGames = statisticsService.getStatisticsByPlayerId(id).size();
+        int totalGames = playerStats.size();
         return new PlayerStats(totalGames, totalAirKills, totalGroundKills, totalScore, totalWins, totalLoses);
     }
 

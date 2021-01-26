@@ -1,7 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.controlers;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.FilterCriteriaDto;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.MissionDatesDateDto;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDatesToSearchDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class PlayerController {
     @Autowired
     private final PlayerService playerService;
     @Autowired
-    private final PlayerTotalStatsService playerTotalStatsService;
+    private final StatisticsService statisticsService;
     @Autowired
     private final StatisticsDtoService statisticsDtoService;
     @Autowired
@@ -55,7 +56,7 @@ public class PlayerController {
 
     @RequestMapping(value = "/total/{id}", method = GET)
     public PlayerStats getTotalResultsByPlayerId(@PathVariable long id) {
-        return playerTotalStatsService.getTotalStatsOfPlayerWithId(id);
+        return statisticsService.calculateTotalStatisticsForPlayer(id);
     }
 
     @RequestMapping(value = "/{id}", method = GET)
@@ -67,7 +68,7 @@ public class PlayerController {
     public Resource generatePlayerReport(@PathVariable long id, HttpServletResponse response,
                                          @PathVariable String reportType,
                                          @PathVariable String format,
-                                         @RequestBody(required = false) MissionDatesDateDto missionDatesDateDto) throws IOException {
+                                         @RequestBody(required = false) StatisticsDatesToSearchDto missionDatesDateDto) throws IOException, ParseException {
         String headerName = "attachment;filename=" + id;
         response.addHeader("Content-disposition", headerName);
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);

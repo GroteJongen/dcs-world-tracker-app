@@ -1,6 +1,6 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.kafka;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
 
 import lombok.Setter;
@@ -13,10 +13,16 @@ import java.util.Properties;
 @Setter
 public class KafkaProperties {
 
-    private final String kafkaIp = "127.0.0.1:9092";
+    String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+    String appConfigPath = rootPath + "kafka.properties";
+    String catalogConfigPath = rootPath + "catalog";
+
+
+    private final String kafkaIp;
     private final Properties properties = new Properties();
 
-    public KafkaProperties() {
+    public KafkaProperties(String kafkaIp) {
+        this.kafkaIp = kafkaIp;
         configureKafka();
     }
 

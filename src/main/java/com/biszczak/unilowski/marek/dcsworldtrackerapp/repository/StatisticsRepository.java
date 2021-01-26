@@ -5,6 +5,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,6 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
     List<Statistics> findAllByPlayerId(long playerId, Sort sort);
 
-    @Query("SELECT * FROM statistics  WHERE date >= ?1 AND date <= ?2 AND playerId = ?3")
-    List<Statistics> findAllByDate(long dateFrom, long dateTo, long playerId);
+    @Query(value = "SELECT * FROM statistics  WHERE date >= ?1 AND date <= ?2 AND player_Id = ?3", nativeQuery = true)
+    List<Statistics> findAllByDate(LocalDateTime dateFrom, LocalDateTime dateTo, long playerId);
 }
