@@ -13,11 +13,6 @@ import java.util.Properties;
 @Setter
 public class KafkaProperties {
 
-    String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-    String appConfigPath = rootPath + "kafka.properties";
-    String catalogConfigPath = rootPath + "catalog";
-
-
     private final String kafkaIp;
     private final Properties properties = new Properties();
 

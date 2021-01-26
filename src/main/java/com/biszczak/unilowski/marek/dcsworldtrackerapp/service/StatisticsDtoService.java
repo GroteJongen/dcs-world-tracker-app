@@ -1,15 +1,12 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.service;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.FilterCriteriaDto;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDatesToSearchDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
-
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Statistics;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +66,7 @@ public class StatisticsDtoService {
                 .airKills(statistics.getAirKills())
                 .groundKills(statistics.getGroundKills())
                 .score(statistics.getScore())
+                .deaths(statistics.getDeaths())
                 .isWon(statistics.isWon()).build();
     }
 

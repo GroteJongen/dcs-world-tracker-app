@@ -4,7 +4,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDatesToSear
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.NoSuchFileFormatException;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.UnrecognizedParameterGivenException;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerTotalStatsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.report_generator.JsonReportGenerator;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.report_generator.TimestampParser;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.report_generator.XmlReportGenerator;
@@ -72,8 +72,8 @@ public class ReportGeneratorContext {
         return new InputStreamResource(new FileInputStream(reportGenerator.createReportForListOfMissions(statisticsDto, playerId)));
     }
 
-    private Resource getPlayerTotalStatsReport(PlayerStats playerStats, long playerId) throws IOException {
-        return new InputStreamResource(new FileInputStream(reportGenerator.createReportForTotalStats(playerStats, playerId)));
+    private Resource getPlayerTotalStatsReport(PlayerTotalStatsDto playerTotalStatsDto, long playerId) throws IOException {
+        return new InputStreamResource(new FileInputStream(reportGenerator.createReportForTotalStats(playerTotalStatsDto, playerId)));
     }
 
 

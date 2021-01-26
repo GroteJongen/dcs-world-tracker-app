@@ -26,6 +26,8 @@ public class Statistics {
 
     private int airKills;
 
+    private int deaths;
+
     private int groundKills;
 
     private boolean isWon;

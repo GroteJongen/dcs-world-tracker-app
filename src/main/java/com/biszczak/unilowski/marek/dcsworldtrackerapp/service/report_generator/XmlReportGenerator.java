@@ -1,7 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.service.report_generator;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerTotalStatsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.strategy.ReportGenerator;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.stereotype.Service;
@@ -29,12 +29,12 @@ public class XmlReportGenerator implements ReportGenerator {
     }
 
     @Override
-    public File createReportForTotalStats(PlayerStats playerStats, long playerId) throws IOException {
+    public File createReportForTotalStats(PlayerTotalStatsDto playerTotalStatsDto, long playerId) throws IOException {
         String finalPath = defaultBaseDir + playerId + playerId + ".xml";
         if (!Files.exists(Paths.get(defaultBaseDir))) {
             Files.createDirectory(Paths.get(defaultBaseDir));
         }
-        xmlMapper.writeValue(new File(finalPath), playerStats);
+        xmlMapper.writeValue(new File(finalPath), playerTotalStatsDto);
         return new File(finalPath);
     }
 

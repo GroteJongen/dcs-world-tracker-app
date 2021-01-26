@@ -9,7 +9,6 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.MissionService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.SearchService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsDtoService;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.StatisticsService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

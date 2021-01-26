@@ -6,7 +6,7 @@ import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.exceptions.PlayerAlreadyExistException;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.Player;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerTotalStatsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/total/{id}", method = GET)
-    public PlayerStats getTotalResultsByPlayerId(@PathVariable long id) {
+    public PlayerTotalStatsDto getTotalResultsByPlayerId(@PathVariable long id) {
         return statisticsService.calculateTotalStatisticsForPlayer(id);
     }
 

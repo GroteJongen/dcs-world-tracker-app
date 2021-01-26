@@ -1,7 +1,7 @@
 package com.biszczak.unilowski.marek.dcsworldtrackerapp.service.report_generator;
 
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.StatisticsDto;
-import com.biszczak.unilowski.marek.dcsworldtrackerapp.model.PlayerStats;
+import com.biszczak.unilowski.marek.dcsworldtrackerapp.dto.PlayerTotalStatsDto;
 import com.biszczak.unilowski.marek.dcsworldtrackerapp.strategy.ReportGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -35,12 +35,12 @@ public class JsonReportGenerator implements ReportGenerator {
     }
 
     @Override
-    public File createReportForTotalStats(PlayerStats playerStats, long playerId) throws IOException {
+    public File createReportForTotalStats(PlayerTotalStatsDto playerTotalStatsDto, long playerId) throws IOException {
         String finalPath = defaultBaseDir + "total_" + playerId + ".json";
         if (!Files.exists(Paths.get(defaultBaseDir))) {
             Files.createDirectory(Paths.get(defaultBaseDir));
         }
-        objectMapper.writeValue(new File(finalPath), playerStats);
+        objectMapper.writeValue(new File(finalPath), playerTotalStatsDto);
         return new File(finalPath);
     }
 
