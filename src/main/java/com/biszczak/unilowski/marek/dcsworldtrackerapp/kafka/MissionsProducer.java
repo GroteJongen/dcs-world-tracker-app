@@ -31,7 +31,7 @@ public class MissionsProducer {
             return;
         }
         String kafka_topic = "player_missions_and_stats";
-        ProducerRecord<String, String> missionRecord = new ProducerRecord<>(kafka_topic, getJsonStringFromMission(statisticsDto));
+        ProducerRecord<String, String> missionRecord = new ProducerRecord<>(kafka_topic,getJsonStringFromMission(statisticsDto));
         missionsProducer.send(missionRecord);
         missionsProducer.flush();
     }
