@@ -38,7 +38,7 @@ public class StatisticsService {
     }
 
     public List<Statistics> getStatisticsByPlayerId(long id) {
-        final List<Statistics> playerStats = statisticsRepository.findAllByPlayerId(id);
+        final List<Statistics> playerStats = statisticsRepository.findByPlayerId(id);
         if (playerStats.isEmpty()) {
             throw new PlayerHasNoStatisticsOrDoesNotExistsException("Statistics for given player does not exist");
         }
@@ -84,7 +84,7 @@ public class StatisticsService {
     }
 
     public PlayerTotalStatsDto calculateTotalStatisticsForPlayer(long id) {
-        return playerTotalStatsService.getTotalStatsOfPlayerWithId(statisticsRepository.findAllByPlayerId(id));
+        return playerTotalStatsService.getTotalStatsOfPlayerWithId(statisticsRepository.findByPlayerId(id));
     }
 
     public PlayerTotalStatsDto calculateTotalStatisticsForPlayerBasingOnDateQuery(long id, StatisticsDatesToSearchDto statisticsDatesToSearchDto) {

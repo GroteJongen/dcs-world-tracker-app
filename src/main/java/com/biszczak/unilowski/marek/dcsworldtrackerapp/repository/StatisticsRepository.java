@@ -14,7 +14,7 @@ public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
     Optional<Statistics> findByMissionIdAndPlayerId(long missionId, long playerId);
 
-    List<Statistics> findAllByPlayerId(long playerId);
+    List<Statistics> findByPlayerId(long playerId);
 
     List<Statistics> findAllByPlayerId(long playerId, Sort sort);
 

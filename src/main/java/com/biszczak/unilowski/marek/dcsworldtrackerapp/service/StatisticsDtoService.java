@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,28 +31,21 @@ public class StatisticsDtoService {
     public List<StatisticsDto> getAllPlayerMissionStats(long id) {
         List<Statistics> playerStatistics = statisticsService.getStatisticsByPlayerId(id);
         List<StatisticsDto> playerStatisticsDto = new ArrayList<>();
-        for (Statistics statistics : playerStatistics) {
-            playerStatisticsDto.add(createStatisticsDtoFromStatistics(statistics));
-        }
+        playerStatistics.forEach(x -> playerStatisticsDto.add(createStatisticsDtoFromStatistics(x)));
         return playerStatisticsDto;
     }
 
 
     public List<StatisticsDto> getAllSortedResults(long id, FilterCriteriaDto filterCriteriaDto) {
-        List<StatisticsDto> sortedStatistics = new ArrayList<>();
         if (filterCriteriaDto.getSort().equals("ASC")) {
-            List<Statistics> ascSortedStats = statisticsService.findAllSortedForPlayerId(Sort.by(Sort.Direction.ASC, filterCriteriaDto.getParamName()), id);
-            for (Statistics statistics : ascSortedStats) {
-                sortedStatistics.add(createStatisticsDtoFromStatistics(statistics));
-            }
-            return sortedStatistics;
+            List<Statistics> ascSortedStats = statisticsService.findAllSortedForPlayerId(Sort.by(Sort.Direction.ASC,
+                    filterCriteriaDto.getParamName()), id);
+            return addStatisticsDtoToList(ascSortedStats);
         }
         if (filterCriteriaDto.getSort().equals("DESC")) {
-            List<Statistics> ascSortedStats = statisticsService.findAllSortedForPlayerId(Sort.by(Sort.Direction.DESC, filterCriteriaDto.getParamName()), id);
-            for (Statistics statistics : ascSortedStats) {
-                sortedStatistics.add(createStatisticsDtoFromStatistics(statistics));
-            }
-            return sortedStatistics;
+            List<Statistics> descSortedStatistics = statisticsService.findAllSortedForPlayerId(
+                    Sort.by(Sort.Direction.DESC, filterCriteriaDto.getParamName()), id);
+            return addStatisticsDtoToList(descSortedStatistics);
         } else {
             return getAllPlayerMissionStats(id);
         }
@@ -68,6 +62,12 @@ public class StatisticsDtoService {
                 .score(statistics.getScore())
                 .deaths(statistics.getDeaths())
                 .isWon(statistics.isWon()).build();
+    }
+
+    private List<StatisticsDto> addStatisticsDtoToList(List<Statistics> statistics) {
+        List<StatisticsDto> convertedStats = new ArrayList<>();
+        statistics.forEach(x -> convertedStats.add(createStatisticsDtoFromStatistics(x)));
+        return convertedStats;
     }
 
 }
