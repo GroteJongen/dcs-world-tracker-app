@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class MissionService {
+
     @Autowired
     private final MissionRepository missionRepository;
 
