@@ -9,6 +9,11 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 public class PlayerDto {
+
+    @NotNull
+    @NotEmpty
+    private String name;
+
     @NotNull
     @NotEmpty
     private String login;

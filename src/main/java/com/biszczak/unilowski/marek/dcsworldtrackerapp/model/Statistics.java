@@ -3,6 +3,7 @@ package com.biszczak.unilowski.marek.dcsworldtrackerapp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "statistics")
@@ -25,8 +26,12 @@ public class Statistics {
 
     private int airKills;
 
+    private int deaths;
+
     private int groundKills;
 
     private boolean isWon;
+
+    private LocalDateTime date;
 
 }

@@ -1,4 +1,4 @@
-package com.biszczak.unilowski.marek.dcsworldtrackerapp.model;
+package com.biszczak.unilowski.marek.dcsworldtrackerapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,12 +10,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerStats {
+public class PlayerTotalStatsDto {
 
     private int totalMissions;
-    private int totalKills;
+    private int totalAirKills;
     private int totalGroundKills;
     private int totalScore;
     private int totalVictories;
     private int totalLoses;
+    private int totalDeaths;
+    private double killDeathRatio;
+    private double winLooseRatio;
 }

@@ -25,9 +25,7 @@ public class Mission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
     private String missionName;
-    @Column
     private String description;
     @OneToMany
     @Cascade(ALL)
